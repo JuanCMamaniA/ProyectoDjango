@@ -1,38 +1,48 @@
+{% load static %}
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <link rel="Stylesheet" href="../css/login.css">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="icon" href="../img/icon/icono_ws-transformed.ico">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="icon" href="{% static 'img/icon/icono_ws-transformed.ico' %}">
     <title>Login</title>
 </head>
 <body>
 
+{% include 'shared/header.html' %}
+
 <!--ACA ESTA LA BOTONERA -->
+
+
 
 <header class="page_header">
     <section class="container">
         <nav class="navbar">
             <picture class="logo_container">
-                <a href="../index.html">
-                    <img class="logo" src="../img/logo white.png" alt="Logo">
+                <a href="{% url 'login' %}">
+                    <img class="logo" src="{% static 'img/logo white.png' %}" alt="Logo">
                 </a>
             </picture>
             <div class="navigation_content">
-                <ul class="nav_menu nav_menu_visible">
-                    <li class="nav_menu_item"><a href="../index.html" class="navbar_Item">Inicial</a></li>
-                    <li class="nav_menu_item"><a href="../pages/garage.html" class="navbar_Item">Garage</a></li>
-                    <li class="nav_menu_item"><a href="../pages/venta_auto.html" class="navbar_Item">Vende tu Auto</a>
-                    </li>
-                    <li class="nav_menu_item"><a href="../pages/contacto.html" class="navbar_Item">Contacto</a></li>
-                </ul>
-                <div class="container_user_section">
-                    <a id="login" class="user_section" href="../pages/login.html">Inicial Sesion</a>
-                    <a id="sing_up" class="user_section" href="../pages/registro_user.html">Registrarse</a>
-                    <a id="profile" class="user_section" href="../pages/perfil.html">Perfil</a>
-                </div>
+                <div class="navigation_content">
+                    <ul class="nav_menu nav_menu_visible">
+                        <li class="nav_menu_item"><a href="{% url 'index' %}" class="navbar_Item">Inicial</a></li>
+                        <li class="nav_menu_item"><a href="{% url 'garage' %}" class="navbar_Item">Garage</a></li>
+                        <li class="nav_menu_item"><a href="{% url 'venta_auto' %}" class="navbar_Item">Vende tu Auto</a></li>
+                        <li class="nav_menu_item"><a href="{% url 'contacto' %}" class="navbar_Item">Contacto</a></li>
+                    </ul>
+                    <div class="container_user_section">
+                        <a id="login" class="user_section" href="{% url 'login' %}">Inicial Sesion</a>
+                        <a id="sing_up" class="user_section" href="{% url 'registro_user' %}">Registrarse</a>
+                        <!--- <a id="profile" class="user_section" href="{% url 'perfil' %}">Perfil</a> --->
+                        <a id="profile" class="user_section" href="{% url 'login' %}">Login</a>
+                        <!--- <a id="profile" class="user_section" href="{% url 'logout' %}">Logout</a>--->
+                    </div>
             </div>
             <button class="hamburger">
                 <div class="hamburger_line1"></div>
@@ -45,25 +55,29 @@
 </header>
 
 
+
 <!---ACA ESTA EL BOX PARA HACER EL LOGIN -->
 
-    <div class="login_container">
-        <form class="login_form">
-            <h2>Iniciar Sesión</h2>
-            <div class="input_container">
-                <input type="text" name="user_name" required />
-                <label>Usuario</label>
-            </div>
-            <div class="input_container">
-                <input type="password" name="password" required />
-                <label>Contraseña</label>
-            </div>
-            <a href="perfil.html">Entrar</a>
-        </form>
-    </div>
-    
-    
+<div class="login_container">
+    <form class="login_form" method="POST">
+        {% csrf_token %}
+        <h2>Iniciar Sesión</h2>
+        <div class="input_container">
+            <input type="text" id="idusername" name="username" required maxlength="70" />
+            <label for="idusername">Usuario</label>
+        </div>
 
+        <div class="input_container">
+            <input type="password" id="id_password" name="password" required maxlength="" />
+            <label for="id_password">Contraseña</label>
+        </div>
+
+        <button type="submit">Entrar</button>
+
+        
+    </form>
+</div>
+    
 
 
     
@@ -77,8 +91,8 @@
 <footer class="footer_page">
     <section class="container">
         <section class="footer_section">
-            <a class="logo_container" href="../index.html">
-                <img class="logo" src="../img/logo white.png" alt="Logo">
+            <a class="logo_container" href="{% url 'index' %}">
+                <img class="logo" src="{% static 'img/logo white.png' %} " alt="Logo">
             </a>
             <ul class="fotter_column">
                 <span class="footer_column_title">¿NECESITA AYUDA?</span>
@@ -118,6 +132,8 @@
 </footer>
 
 <script src="https://kit.fontawesome.com/2bfac4fd93.js" crossorigin="anonymous"></script>
-<script src="../js/nav_bar.js"></script>
+
+<script src="{% static '/js/nav_bar.js' %}"></script>
+
 </body>
 </html>

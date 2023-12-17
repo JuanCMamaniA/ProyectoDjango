@@ -16,8 +16,40 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+
+
+from django.views.generic import RedirectView
 from myproyect import views
+from django.contrib.auth import views as auth_views
+
+
+from myproyect.views import (   
+    login,
+    registro_user,
+    perfil,
+    )
+   
+
+
+from myproyect import views
+
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.casa,name='casa')
+    path('',views.casa,name='casa'),
+
+    # login, perfil , registro_user
+    path('', RedirectView.as_view(url='index/', permanent=False)),     
+    path('', login, name='login'),    
+    path('perfil.html', perfil, name='perfil'),
+    path('registro_user/', registro_user, name='registro_user'), 
+    
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', views.custom_logout, name='logout'),
+
+  
+
+
 ]
