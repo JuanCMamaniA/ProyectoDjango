@@ -1,11 +1,12 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/estilos_venta_auto.css">
-    <link rel="icon" href="../img/icon/icono_ws-transformed.ico">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos_venta_auto.css' %}">
+    <link rel="icon" href="{%static 'img/icon/icono_ws-transformed.ico'%}">
     <title>venta_auto</title>
 </head>
 
@@ -15,13 +16,13 @@
         <section class="container">
             <nav class="navbar">
                 <picture class="logo_container">
-                    <a href="index.html">
-                        <img class="logo" src="../img/logo white.png" alt="Logo">
+                    <a href="/">
+                        <img class="logo" src="{% static "img/logo_white.png" %}" alt="Logo">
                     </a>
                 </picture>
                 <div class="navigation_content">
                     <ul class="nav_menu nav_menu_visible">
-                        <li class="nav_menu_item"><a href="../index.html" class="navbar_Item">Inicial</a></li>
+                        <li class="nav_menu_item"><a href="/" class="navbar_Item">Inicial</a></li>
                         <li class="nav_menu_item"><a href="../pages/garage.html" class="navbar_Item">Garage</a></li>
                         <li class="nav_menu_item"><a href="../pages/venta_auto.html" class="navbar_Item">Vende tu Auto</a>
                         </li>
@@ -56,7 +57,7 @@
             </div>
         </div>
         <div class="intro">
-            <img src="../img/man_repair.jpg" alt="man fixing car">
+            <img src="{% static "img/man_repair.jpg" %}" alt="man fixing car">
         </div>
     </section>
 
@@ -99,8 +100,9 @@
     </section>
 
     <section id="formulario" class="conteiner">
-    
-        <form action="htto://midominio.com/miServicioWeb.php" id="formulario_publicacion"> <!-- method="get" method="post" -->
+
+        <form action="{% url 'venta_auto'%}" method="post" id="formulario_publicacion">
+            {% csrf_token %}
             <fieldset class="grid">
                 <legend>
                     Datos de contacto
@@ -195,21 +197,17 @@
                     <input type="file" name="imagen" id="imagen">
                 </div>
             </fieldset>
+
+            <input type="submit" value="Enviar formulario">
+
         </form>
     </section>
-    
-    <section id="button1" class="conteiner">
-        <div class="button-container">
-            <a href="#" id="enviar-form">Enviar</a>
-        </div>
-    </section>
-        
 
     <footer class="footer_page">
         <section class="container">
             <section class="footer_section">
-                <a class="logo_container" href="index.html">
-                    <img class="logo" src="../img/logo white.png" alt="Logo">
+                <a class="logo_container" href="/">
+                    <img class="logo" src="{% static "img/logo_white.png" %}" alt="Logo">
                 </a>
                 <ul class="fotter_column">
                     <span class="footer_column_title">¿NECESITA AYUDA?</span>
